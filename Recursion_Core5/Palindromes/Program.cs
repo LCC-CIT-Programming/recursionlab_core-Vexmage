@@ -8,6 +8,10 @@
  * Base case is going to be if length of the string is 0 or 1, which is true.
  * Compare last and first characters of string. If not equal then IsPalindrome = false.
  * IsPalindrom method should be called recursively.
+ * The recursive case for the Palindrome program is to check if the first and last characters
+ * of the string are the same. If they are, then the function should call itself 
+ * recursively with the substring of the original string that excludes 
+ * the first and last characters.
  * User Input is a word or phrase entered.
  * Output is whether or not the input is a palindrome. 
  * 
@@ -25,7 +29,12 @@ namespace Palindrome
             Console.Write("Enter word or phrase: ");
             string text = Console.ReadLine();
 
-            if (IsPalindrome(text))
+            // Remove all non-alphanumeric characters and convert to lowercase
+            string cleanText = new string(text.ToLower().ToCharArray()
+                                            .Where(c => Char.IsLetterOrDigit(c))
+                                            .ToArray());
+
+            if (IsPalindrome(cleanText))
             {
                 Console.WriteLine("The text is a palindrome!");
             }
@@ -44,10 +53,17 @@ namespace Palindrome
             {
                 return true;
             }
-            // To do, recursive case
+            // Recursive case
             else
             {
-                return false;
+                if (s[0] == s[s.Length - 1])
+                {
+                    return IsPalindrome(s.Substring(1, s.Length - 2));
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
     }
