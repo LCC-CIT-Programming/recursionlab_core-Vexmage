@@ -40,7 +40,7 @@ namespace TowerOfHanoi
             Console.Write("Enter the number of disks: ");
             int n = int.Parse(Console.ReadLine());
             // Call the moveDisks function to solve the puzzle
-            moveDisks(3, 'A', 'C', 'B');
+            moveDisks(n, 'A', 'C', 'B');
         }
 
         // Function to move 'n' disks from the 'start' tower to the 'end' tower using the 'temp' tower
