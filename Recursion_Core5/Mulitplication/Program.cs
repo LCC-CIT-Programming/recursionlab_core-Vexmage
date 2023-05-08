@@ -7,26 +7,55 @@ namespace Mulitplication
         static void Main(string[] args)
         {
             Console.WriteLine("Multiply");
-            for (int n = 1; n <= 10; n++)
-                Console.WriteLine(String.Format("5 * {0,2} is {1,2}", n, multiply(5, n)));
-            Console.WriteLine();
 
-            Console.WriteLine("Now for some real fun!");
-            Console.WriteLine(String.Format("5 * {0,2} is {1,2}", 0, multiply(5, 0)));
+            // Prompt the user to choose an algorithm
+            Console.WriteLine("Choose an algorithm: ");
+            Console.WriteLine("1. Iterative");
+            Console.WriteLine("2. Recursive");
+            int choice = int.Parse(Console.ReadLine());
 
+            // Perform multiplication using the chosen algorithm
+            if (choice == 1)
+            {
+                for (int n = 1; n <= 10; n++)
+                    Console.WriteLine(String.Format("5 * {0,2} is {1,2}", n, MultiplyIterative(5, n)));
+                    Console.WriteLine();
+
+                    Console.WriteLine("Now for some real fun!");
+                    Console.WriteLine(String.Format("5 * {0,2} is {1,2}", 0, MultiplyIterative(5, 0)));
+                    Console.WriteLine();
+            }
+            else if (choice == 2)
+            {
+                for (int n = 1; n <= 10; n++)
+                    Console.WriteLine(String.Format("5 * {0,2} is {1,2}", n, MultiplyRecursive(5, n)));
+                Console.WriteLine();
+
+                Console.WriteLine("Now for some real fun!");
+                Console.WriteLine(String.Format("5 * {0,2} is {1,2}", 0, MultiplyRecursive(5, 0)));
+            }
+            else
+            {
+                Console.WriteLine("Invalid choice.");
+            }
         }
 
-        // 3 * 1 = 3
-        // 3 * 2 = 3 + 3
-        // 3 * 3 = 3 + (3 + 3) or 3 + 3 *2
-        static int multiply(int x, int y)
+        static int MultiplyIterative(int x, int y)
         {
-            // every recursive function has a base case - the condition that causes it to stop
+            int result = 0;
+            for (int i = 0; i < y; i++)
+            {
+                result += x;
+            }
+            return result;
+        }
+
+        static int MultiplyRecursive(int x, int y)
+        {
             if (y == 1)
                 return x;
-            // when it's not the base case the function calls itself with a parameter value that approaches the base case
             else
-                return x + multiply(x, y - 1);
+                return x + MultiplyRecursive(x, y - 1);
         }
     }
 }
